@@ -294,5 +294,5 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 ---
 
 <div align="center">
-  <b>Developed with ❤️ for the Hand Rummy & AI Research Community</b>
+  <b>Science is Elegant.</b>
 </div>
