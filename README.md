@@ -1,4 +1,4 @@
-﻿# 🎴 Jawaker Hand AI Grandmaster (محرك الذكاء الاصطناعي الخارق لهاند جواكر)
+﻿# 🎴 Jawaker Hand AI Grandmaster
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![Godot Engine](https://img.shields.io/badge/Godot-4.x-478cbf?logo=godotengine&logoColor=white)](https://godotengine.org/)
@@ -6,15 +6,15 @@
 [![Deep Reinforcement Learning](https://img.shields.io/badge/AI-ISMCTS%20%2B%20Neural%20Value%20Net-orange)](https://github.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-> **A Superhuman, Deep Reinforcement Learning & Information Set Monte Carlo Tree Search (ISMCTS) AI Engine paired with a Luxury Godot 4 Client for Jawaker Hand Rummy (هاند جواكر).**
+> **A Superhuman, Deep Reinforcement Learning & Information Set Monte Carlo Tree Search (ISMCTS) AI Engine paired with a Luxury Godot 4 Client for Jawaker Hand Rummy.**
 
 ---
 
-## 🌟 Overview (نظرة عامة)
+## 🌟 Overview
 
-**Jawaker Hand AI** is an advanced, production-grade artificial intelligence engine designed specifically for the popular Middle Eastern card game **Jawaker Hand (هاند جواكر / Hand Rummy)**. Built with rigorous adherence to official tournament rules, it combines:
+**Jawaker Hand AI** is an advanced, production-grade artificial intelligence engine designed specifically for the popular card game **Jawaker Hand Rummy**. Built with rigorous adherence to official tournament rules, it combines:
 
-1. **Apex Grandmaster Engine**: 60-iteration Deep ISMCTS search coupled with AlphaZero-style heuristic priors, Bayesian card counting, and deadwood synergy matrices.
+1. **Apex Grandmaster Engine**: 60-iteration Deep ISMCTS lookahead search coupled with AlphaZero-style heuristic priors, Bayesian card counting, and deadwood synergy matrices.
 2. **Deep Neural Value Network**: A 2-hidden layer feed-forward value network (32 inputs $\to$ 64 hidden $\to$ 32 hidden $\to$ 1 output) trained over **10,000+ full self-play games**.
 3. **Luxury Godot 4 Client**: Vector card rendering, drag-and-drop mechanics, sound effects, real-time AI thought HUD, and interactive match analytics.
 4. **Interactive AI Lab & Brain Graph Visualizer**: A full post-game analysis lab with turn-by-turn scrubber, candidate action evaluation trees, and an animated, real-time **Neural Brain Graph** displaying exact float activations and active synaptic pathways.
@@ -23,12 +23,12 @@
 
 ---
 
-## 🏗️ System Architecture (العمارة الهندسية)
+## 🏗️ System Architecture
 
 `mermaid
 graph TD
     subgraph "Godot 4 Client (UI & Telemetry)"
-        G1["Luxury Table View<br/>(Drag & Drop, Melds, RTL Badges)"]
+        G1["Luxury Table View<br/>(Drag & Drop, Melds, Action Badges)"]
         G2["Live AI Thought HUD<br/>(Real-time State & Latency)"]
         G3["AI Lab Inspector<br/>(Turn Scrubber & Decision Trees)"]
         G4["Brain Graph Visualizer<br/>(Live 32➔64➔32➔1 Neural Activation)"]
@@ -80,7 +80,7 @@ The neural evaluator extracts a 32-dimensional strategic feature vector represen
 * **Defensive Danger Index**: Discard attachment hazard to opponent sets, penalty value penalty.
 * **Endgame Ambition**: 14-card Hand Finish potential ($-60$ pt swing).
 
-\text{Layer Architecture: } \mathbf{X} \in \mathbb{R}^{32} \xrightarrow{\mathbf{W}_1, \mathbf{b}_1} \text{ReLU}(\mathbf{h}_1 \in \mathbb{R}^{64}) \xrightarrow{\mathbf{W}_2, \mathbf{b}_2} \text{ReLU}(\mathbf{h}_2 \in \mathbb{R}^{32}) \xrightarrow{\mathbf{W}_3, \mathbf{b}_3} \hat{V}(s) \in \mathbb{R}
+\mathbf{X} \in \mathbb{R}^{32} \xrightarrow{\mathbf{W}_1, \mathbf{b}_1} \text{ReLU}(\mathbf{h}_1 \in \mathbb{R}^{64}) \xrightarrow{\mathbf{W}_2, \mathbf{b}_2} \text{ReLU}(\mathbf{h}_2 \in \mathbb{R}^{32}) \xrightarrow{\mathbf{W}_3, \mathbf{b}_3} \hat{V}(s) \in \mathbb{R}
 
 ### 2. Information Set MCTS (ISMCTS) with Bayesian Belief
 Because card games involve imperfect information, the AI samples unobserved opponent cards from a Bayesian belief distribution conditioned on:
@@ -91,13 +91,13 @@ Because card games involve imperfect information, the AI samples unobserved oppo
 In each of the **60 lookahead iterations**, the agent samples a consistent determinization of the world, simulates future turns using UCB1 exploration-exploitation, and evaluates leaf states with the Neural Value Network.
 
 ### 3. Hand Synergy & Defensive Blunder Shield
-* **Synergy Matrix**: Automatically protects pairs (e.g. 8♦ 8♠) and suited connectors (e.g. 9♥ 10♥) from premature discard.
+* **Synergy Matrix**: Automatically protects pairs (e.g., 8♦ 8♠) and suited connectors (e.g., 9♥ 10♥) from premature discard.
 * **Blunder Shield**: Checks all open table melds; if a card can be attached by the opponent, it receives a severe penalty ($-1000$ pts) preventing dangerous discards.
 * **Dead Card Detection**: Identifies cards whose duplicate copies have already appeared on the table or discard pile, marking them 100% safe to burn.
 
 ---
 
-## 🎮 Official Jawaker Hand Rules Enforced
+## 🎮 Official Tournament Rules Enforced
 
 * **Deck Composition**: 106 cards (2 standard 52-card decks + 2 Jokers).
 * **Hand Deal**: 14 cards per player (15 to the first player right of the dealer).
@@ -112,85 +112,62 @@ In each of the **60 lookahead iterations**, the agent samples a consistent deter
 
 ---
 
-## 📁 Repository Structure (هيكل المشروع)
+## 📁 Repository Structure
 
 `	ext
 jawaker-hand-ai/
-├── godot_client/                     # Luxury Godot 4 Game Client
-│   ├── assets/                       # UI audio and visual assets
+├── godot_client/
 │   ├── scenes/
-│   │   ├── Table.tscn                # Main game table & AI Lab UI
-│   │   ├── Card.tscn                 # Dynamic vector playing card scene
-│   │   └── TableMeld.tscn            # Open table meld container
+│   │   ├── Table.tscn                 # Main Table UI & AI Lab Inspector
+│   │   ├── Card.tscn                  # Vector playing card scene
+│   │   └── TableMeld.tscn             # Table meld container
 │   ├── scripts/
-│   │   ├── Table.gd                  # Game controller & AI Lab scrubber
-│   │   ├── NetworkClient.gd          # WebSocket networking client
-│   │   ├── Card.gd                   # Card state & drag-and-drop logic
-│   │   ├── TableMeld.gd              # Meld layout manager
-│   │   └── BrainGraphVisualizer.gd   # Animated neural brain graph
-│   └── project.godot                 # Godot 4.x project configuration
+│   │   ├── Table.gd                   # Table controller & turn scrubber
+│   │   ├── NetworkClient.gd           # WebSocket client
+│   │   └── BrainGraphVisualizer.gd    # Real-time neural brain graph
+│   └── project.godot                  # Godot 4.x project settings
 │
-├── jawaker_hand_ai/                  # Python AI & Game Engine Backend
-│   ├── agents/                       # AI Agent implementations
-│   │   ├── apex_grandmaster_agent.py # Superhuman Grandmaster Agent
-│   │   ├── deep_rl_agent.py          # 32-dim Neural Value Network Agent
-│   │   ├── ismcts_agent.py           # Information Set MCTS Agent
-│   │   ├── pimc_agent.py             # Perfect Information MCTS Agent
-│   │   ├── heuristic_agent.py        # Rule-based Grandmaster Agent
-│   │   ├── greedy_agent.py           # Rapid opener baseline
-│   │   └── random_agent.py           # Legal random baseline
-│   ├── engine/                       # Core Hand Rummy Engine
-│   │   ├── card.py                   # 106-card representation & ranks
-│   │   ├── melds.py                  # Exact 51+ point optimizer
-│   │   ├── state.py                  # Game state, phases, and actions
-│   │   ├── table.py                  # Melds & Joker swapping
-│   │   └── rules.py                  # Official tournament rules
-│   ├── learning/                     # Training & Neural Networks
-│   │   ├── network.py                # Vectorized NeuralValueNetwork
-│   │   ├── massive_trainer.py        # 10,000-game self-play orchestrator
-│   │   ├── evolution.py              # Genetic algorithm trainer
-│   │   └── trainer.py                # Self-play experience loop
-│   ├── opponent/                     # Bayesian opponent modeling
-│   │   └── belief.py                 # Card probability distributions
-│   ├── persistence/                  # Storage & Telemetry
-│   │   ├── db.py                     # SQLite experience database
-│   │   ├── trace.py                  # DecisionTrace telemetry data
-│   │   └── session_tracker.py        # 100-Game Challenge Tracker
-│   ├── knowledge/                    # Obsidian Vault integration
-│   │   └── exporter.py               # Markdown telemetry exporter
-│   ├── server/                       # WebSocket Server
-│   │   └── server.py                 # Async WebSocket server for Godot 4
-│   └── cli/                          # Command-Line Interfaces
-│       ├── main.py                   # Main CLI entry point
-│       ├── interactive.py            # Terminal game runner
-│       └── replay.py                 # Terminal trace inspector
+├── jawaker_hand_ai/
+│   ├── agents/
+│   │   ├── apex_grandmaster_agent.py  # Superhuman Grandmaster Agent
+│   │   ├── deep_rl_agent.py           # 32-dim Value Network Agent
+│   │   ├── ismcts_agent.py            # Information Set MCTS Agent
+│   │   └── heuristic_agent.py         # Rule-based Tactical Agent
+│   ├── engine/
+│   │   ├── card.py                    # 106-card deck representation
+│   │   ├── melds.py                   # Exact 51+ meld optimizer
+│   │   ├── state.py                   # Game state & phase machine
+│   │   ├── table.py                   # Melds & Joker replacement
+│   │   └── rules.py                   # Official scoring & penalties
+│   ├── learning/
+│   │   ├── network.py                 # Vectorized NeuralValueNetwork
+│   │   └── massive_trainer.py         # 10,000-game self-play trainer
+│   ├── opponent/
+│   │   └── belief.py                  # Bayesian card tracking
+│   ├── persistence/
+│   │   ├── db.py                      # SQLite experience database
+│   │   ├── trace.py                   # Structured DecisionTrace telemetry
+│   │   └── session_tracker.py         # 100-Game Challenge Tracker
+│   ├── server/
+│   │   └── server.py                  # Async WebSocket server for Godot
+│   └── cli/
+│       └── main.py                    # Unified CLI entry point
 │
-├── models/                           # Pretrained Neural Network Weights
-│   └── gen_apex.json                 # 10,000-game trained weights (4,225 params)
+├── models/
+│   └── gen_apex.json                  # Pretrained neural network weights
 │
-├── tests/                            # Unit & Integration Test Suite
-│   ├── test_engine.py                # Game state & phase progression
-│   ├── test_melds.py                 # 51+ point meld optimizer
-│   ├── test_rules.py                 # Discard reserve & penalty invariants
-│   ├── test_deep_rl.py               # Neural network forward & backprop
-│   ├── test_server.py                # WebSocket protocol & actions
-│   ├── test_replay_and_tracker.py    # AI Lab traces & session tracker
-│   └── ... (23 unit tests total)
-│
-├── obsidian_vault/                   # Obsidian Knowledge Vault
-│   ├── Games/                        # Markdown match traces
-│   ├── Strategy/                     # Optimal strategy guides
-│   ├── Learned Patterns/             # Self-play discoveries & Joker mastery
-│   └── Mistakes/                     # AI blunder analysis
-│
-├── pyproject.toml                    # Package configuration & metadata
-├── requirements.txt                  # Python dependencies
-└── README.md                         # Project documentation
+├── obsidian_vault/                    # Strategy notes & match traces
+├── tests/                             # 23 unit & integration tests
+├── .gitignore                         # Git ignore rules
+├── requirements.txt                   # Python dependencies
+├── pyproject.toml                     # Package metadata
+├── LICENSE                            # MIT License
+└── README.md                          # Documentation
 `
 
 ---
 
-## ⚡ Quickstart Guide (التشغيل السريع)
+## ⚡ Quickstart Guide
 
 ### 1. Prerequisites
 * **Python 3.10+** installed.
@@ -199,7 +176,7 @@ jawaker-hand-ai/
 ### 2. Installation
 `ash
 # Clone the repository
-git clone https://github.com/your-username/jawaker-hand-ai.git
+git clone https://github.com/hamzaalmughrabi/jawaker-hand-ai.git
 cd jawaker-hand-ai
 
 # Create virtual environment
@@ -225,9 +202,9 @@ pytest -v
    `
 2. **Launch Godot 4**:
    * Open the Godot 4 Editor.
-   * Click **Import** and select the godot_client/project.godot file.
-   * Press **F5** (or click the **Play** button in the top-right corner).
-   * Enjoy playing against the Superhuman Grandmaster AI!
+   * Click **Import** and select godot_client/project.godot.
+   * Press **F5** (or click **Play**).
+   * Play against the Superhuman Grandmaster AI!
 
 ---
 
@@ -235,9 +212,9 @@ pytest -v
 
 | Command | Description |
 | :--- | :--- |
-| python -m jawaker_hand_ai.cli.main serve --port 8765 | Start the WebSocket server for the Godot 4 game client. |
-| python -m jawaker_hand_ai.cli.main play --agent apex | Play an interactive game directly in your terminal against Apex Grandmaster. |
-| python -m jawaker_hand_ai.cli.main tournament --rounds 10 --players 2 | Run an automated benchmark tournament between all AI agents. |
+| python -m jawaker_hand_ai.cli.main serve --port 8765 | Start the WebSocket server for the Godot 4 client. |
+| python -m jawaker_hand_ai.cli.main play --agent apex | Play an interactive game in the terminal against Apex Grandmaster. |
+| python -m jawaker_hand_ai.cli.main tournament --rounds 10 --players 2 | Run an automated benchmark tournament across all AI agents. |
 | python -m jawaker_hand_ai.cli.main track | View the **100-Game Human vs AI Challenge** leaderboard. |
 | python -m jawaker_hand_ai.cli.main replay | Interactive terminal decision inspector and turn replayer. |
 | python -m jawaker_hand_ai.cli.main export-vault --output obsidian_vault | Export all match traces, blunder logs, and strategies to Obsidian. |
@@ -253,7 +230,7 @@ Track your win-rate against the AI Grandmaster:
 python -m jawaker_hand_ai.cli.main track
 
 # Record a completed match
-python -m jawaker_hand_ai.cli.main track --record --winner AI --human-score 124 --ai-score -30 --rounds 5 --notes "Close match in round 4"
+python -m jawaker_hand_ai.cli.main track --record --winner AI --human-score 124 --ai-score -30 --rounds 5 --notes "Round 4 Hand finish"
 `
 
 ---
@@ -271,10 +248,10 @@ To open the vault, simply point your **Obsidian App** to the obsidian_vault/ dir
 
 ## 📜 License
 
-This project is licensed under the **MIT License** - see the LICENSE file for details.
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
 
 ---
 
 <div align="center">
-  <b>Developed with ❤️ for the Jawaker Hand Rummy & AI Research Community</b>
+  <b>Developed with ❤️ for the Hand Rummy & AI Research Community</b>
 </div>
