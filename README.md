@@ -10,16 +10,22 @@
 
 ---
 
-## 🌟 Overview
+## 📸 Visual Showcase & Gameplay
 
-**Jawaker Hand AI** is an advanced, production-grade artificial intelligence engine designed specifically for the popular card game **Jawaker Hand Rummy**. Built with rigorous adherence to official tournament rules, it combines:
+| **Luxury Godot 4 Table View** | **Interactive AI Lab & Brain Graph** |
+| :---: | :---: |
+| ![Live Gameplay](docs/screenshots/table_gameplay.png) | ![AI Lab Inspector](docs/screenshots/ai_lab_inspector.png) |
 
-1. **Apex Grandmaster Engine**: 60-iteration Deep ISMCTS lookahead search coupled with AlphaZero-style heuristic priors, Bayesian card counting, and deadwood synergy matrices.
-2. **Deep Neural Value Network**: A 2-hidden layer feed-forward value network (32 inputs -> 64 hidden -> 32 hidden -> 1 output) trained over **10,000+ full self-play games**.
-3. **Luxury Godot 4 Client**: Vector card rendering, drag-and-drop mechanics, sound effects, real-time AI thought HUD, and interactive match analytics.
-4. **Interactive AI Lab & Brain Graph Visualizer**: A full post-game analysis lab with turn-by-turn scrubber, candidate action evaluation trees, and an animated, real-time **Neural Brain Graph** displaying exact float activations and active synaptic pathways.
-5. **Human vs AI 100-Game Tracker**: Built-in competitive session tracker for benchmarking human performance against the Grandmaster AI over multi-match campaigns.
-6. **Obsidian Knowledge Vault**: Automated export of match histories, tactical blunders, opponent dossiers, and optimal meld strategies into Obsidian markdown.
+---
+
+## 🌟 Key Highlights
+
+* **Apex Grandmaster Engine**: 60-iteration Deep ISMCTS lookahead search coupled with AlphaZero-style heuristic priors, Bayesian card counting, and deadwood synergy matrices.
+* **Deep Neural Value Network**: A 2-hidden layer feed-forward value network (32 inputs $\to$ 64 hidden $\to$ 32 hidden $\to$ 1 output) trained over **10,000+ full self-play games**.
+* **Luxury Godot 4 Client**: Vector card rendering, drag-and-drop mechanics, sound effects, real-time AI thought HUD, and interactive match analytics.
+* **Live Neural Brain Graph Visualizer**: A real-time animated **Neural Brain Graph** displaying exact float activations and active synaptic pathways.
+* **Human vs AI 100-Game Tracker**: Built-in competitive session tracker for benchmarking human performance against the Grandmaster AI over multi-match campaigns.
+* **Obsidian Knowledge Vault**: Automated export of match histories, tactical blunders, opponent dossiers, and optimal meld strategies into Obsidian markdown.
 
 ---
 
@@ -74,11 +80,11 @@ graph TD
 ### 1. Vectorized Neural Value Network
 The neural evaluator extracts a 32-dimensional strategic feature vector representing:
 * **Meld & Deadwood Metrics**: Hand penalty sum, melded card ratio, initial meld score, 51+ readiness threshold.
-* **Table Context**: Open status, minimum opponent card count, opponent threat level (<= 5 cards warning).
+* **Table Context**: Open status, minimum opponent card count, opponent threat level ($\le 5$ cards warning).
 * **Tactical Resources**: Usable attachments, Joker counts, Joker hijack opportunities.
 * **Suit & Rank Distributions**: Suit concentration ratios, Aces count, face card weight (K, Q, J).
 * **Defensive Danger Index**: Discard attachment hazard to opponent sets, penalty value penalty.
-* **Endgame Ambition**: 14-card Hand Finish potential (-60 pt swing).
+* **Endgame Ambition**: 14-card Hand Finish potential ($-60$ pt swing).
 
 $$\mathbf{X} \in \mathbb{R}^{32} \xrightarrow{\mathbf{W}_1, \mathbf{b}_1} \text{ReLU}(\mathbf{h}_1 \in \mathbb{R}^{64}) \xrightarrow{\mathbf{W}_2, \mathbf{b}_2} \text{ReLU}(\mathbf{h}_2 \in \mathbb{R}^{32}) \xrightarrow{\mathbf{W}_3, \mathbf{b}_3} \hat{V}(s) \in \mathbb{R}$$
 
@@ -92,7 +98,7 @@ In each of the **60 lookahead iterations**, the agent samples a consistent deter
 
 ### 3. Hand Synergy & Defensive Blunder Shield
 * **Synergy Matrix**: Automatically protects pairs (e.g., `8♦ 8♠`) and suited connectors (e.g., `9♥ 10♥`) from premature discard.
-* **Blunder Shield**: Checks all open table melds; if a card can be attached by the opponent, it receives a severe penalty (-1000 pts) preventing dangerous discards.
+* **Blunder Shield**: Checks all open table melds; if a card can be attached by the opponent, it receives a severe penalty ($-1000$ pts) preventing dangerous discards.
 * **Dead Card Detection**: Identifies cards whose duplicate copies have already appeared on the table or discard pile, marking them 100% safe to burn.
 
 ---
@@ -116,6 +122,8 @@ In each of the **60 lookahead iterations**, the agent samples a consistent deter
 
 ```text
 jawaker-hand-ai/
+├── docs/
+│   └── screenshots/                   # Gameplay & AI Lab UI screenshots
 ├── godot_client/
 │   ├── scenes/
 │   │   ├── Table.tscn                 # Main Table UI & AI Lab Inspector
@@ -191,7 +199,25 @@ pip install -r requirements.txt
 ```bash
 pytest -v
 ```
-*(All 23 engine, neural network, rule invariant, and server tests will run and pass).*
+
+```text
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.0.3, pluggy-1.6.0
+collected 23 items
+
+tests/test_agents.py ..                                                  [  8%]
+tests/test_belief.py .                                                   [ 13%]
+tests/test_card.py ...                                                   [ 26%]
+tests/test_deep_rl.py ...                                                [ 39%]
+tests/test_engine.py ...                                                 [ 52%]
+tests/test_melds.py ....                                                 [ 69%]
+tests/test_replay_and_tracker.py ..                                      [ 78%]
+tests/test_rules.py .                                                    [ 82%]
+tests/test_server.py ..                                                  [ 91%]
+tests/test_table.py ..                                                   [100%]
+
+============================= 23 passed in 2.28s ==============================
+```
 
 ---
 
@@ -230,7 +256,22 @@ Track your win-rate against the AI Grandmaster:
 python -m jawaker_hand_ai.cli.main track
 
 # Record a completed match
-python -m jawaker_hand_ai.cli.main track --record --winner AI --human-score 124 --ai-score -30 --rounds 5 --notes "Round 4 Hand finish"
+python -m jawaker_hand_ai.cli.main track --record --winner Hamza --human-score -30 --ai-score 124 --rounds 5 --notes "Round 5 Finish"
+```
+
+```text
+=================================================================
+           🏆 HAMZA VS APEX GRANDMASTER AI (100-MATCH LOG)        
+=================================================================
+Total Matches Played : 1 / 100
+  Hamza Wins         : 1 (100.0%)
+  AI Wins            : 0 (0.0%)
+  Draws              : 0
+-----------------------------------------------------------------
+#    Winner       Hamza Pts    AI Pts     Notes / Weaknesses
+-----------------------------------------------------------------
+1    Hamza        -30          124        Round 5 Finish
+=================================================================
 ```
 
 ---
