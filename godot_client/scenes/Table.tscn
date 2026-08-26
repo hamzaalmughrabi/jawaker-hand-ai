@@ -1,0 +1,586 @@
+[gd_scene load_steps=11 format=3 uid="uid://d1e2f3g4h5i6"]
+
+[ext_resource type="Script" path="res://scripts/Table.gd" id="1_table_script"]
+[ext_resource type="Script" path="res://scripts/NetworkClient.gd" id="2_network_script"]
+[ext_resource type="Script" path="res://scripts/BrainGraphVisualizer.gd" id="3_brain_script"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_felt"]
+bg_color = Color(0.05, 0.2, 0.12, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.18, 0.11, 0.05, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.7)
+shadow_size = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pile"]
+bg_color = Color(0.04, 0.14, 0.08, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.85, 0.72, 0.35, 0.8)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.5)
+shadow_size = 8
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_badge"]
+bg_color = Color(0.85, 0.25, 0.2, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dialog"]
+bg_color = Color(0.04, 0.1, 0.07, 0.96)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.9, 0.75, 0.3, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.75)
+shadow_size = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lab_panel"]
+bg_color = Color(0.03, 0.07, 0.05, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.3, 0.7, 0.5, 0.8)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0, 0, 0, 0.6)
+shadow_size = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_gold"]
+bg_color = Color(0.85, 0.65, 0.15, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.3)
+shadow_size = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_dark"]
+bg_color = Color(0.12, 0.25, 0.18, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.4, 0.6, 0.5, 0.6)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="Table" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_table_script")
+
+[node name="NetworkClient" type="Node" parent="."]
+script = ExtResource("2_network_script")
+
+[node name="TableFelt" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_felt")
+
+[node name="TopBar" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 24.0
+offset_top = 14.0
+offset_right = -24.0
+offset_bottom = 48.0
+grow_horizontal = 2
+theme_override_constants/separation = 16
+
+[node name="GameModeTabs" type="HBoxContainer" parent="TopBar"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="PlayTabBtn" type="Button" parent="TopBar/GameModeTabs"]
+custom_minimum_size = Vector2(110, 32)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.05, 0.1, 0.05, 1)
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_gold")
+text = "PLAY GAME"
+
+[node name="LabTabBtn" type="Button" parent="TopBar/GameModeTabs"]
+custom_minimum_size = Vector2(110, 32)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.95, 0.9, 1)
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_dark")
+text = "AI LAB"
+
+[node name="Spacer" type="Control" parent="TopBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RoundInfo" type="Label" parent="TopBar"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.95, 0.85, 1)
+theme_override_font_sizes/font_size = 15
+text = "Round 1 / 5"
+horizontal_alignment = 1
+
+[node name="Spacer2" type="Control" parent="TopBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ScoreInfo" type="Label" parent="TopBar"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.85, 0.45, 1)
+theme_override_font_sizes/font_size = 15
+text = "You: 0 pts  |  AI: 0 pts"
+horizontal_alignment = 2
+
+[node name="OpponentArea" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -280.0
+offset_top = 46.0
+offset_right = 280.0
+offset_bottom = 126.0
+grow_horizontal = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="NameLabel" type="Label" parent="OpponentArea"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.85, 0.5, 1)
+theme_override_font_sizes/font_size = 13
+text = "Apex Grandmaster AI"
+horizontal_alignment = 1
+
+[node name="HandBacksContainer" type="HBoxContainer" parent="OpponentArea"]
+layout_mode = 2
+theme_override_constants/separation = -28
+alignment = 1
+
+[node name="StatusBanner" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 126.0
+offset_bottom = 154.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.2, 0.9, 0.5, 1)
+theme_override_font_sizes/font_size = 15
+text = "Connecting to Python Game Engine..."
+horizontal_alignment = 1
+
+[node name="PlayArea" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TableMeldsContainer" type="HFlowContainer" parent="PlayArea"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 28.0
+offset_top = 156.0
+offset_right = -28.0
+offset_bottom = 310.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_constants/h_separation = 14
+theme_override_constants/v_separation = 8
+alignment = 1
+
+[node name="CenterPilesArea" type="HBoxContainer" parent="PlayArea"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -45.0
+offset_right = 100.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="StockPile" type="PanelContainer" parent="PlayArea/CenterPilesArea"]
+custom_minimum_size = Vector2(84, 122)
+layout_mode = 2
+mouse_filter = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pile")
+
+[node name="Label" type="Label" parent="PlayArea/CenterPilesArea/StockPile"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.85, 0.75, 1)
+theme_override_font_sizes/font_size = 12
+text = "STOCK\nDECK\n(سحب)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountBadge" type="Panel" parent="PlayArea/CenterPilesArea/StockPile"]
+custom_minimum_size = Vector2(28, 22)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_badge")
+
+[node name="Label" type="Label" parent="PlayArea/CenterPilesArea/StockPile/CountBadge"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 11
+text = "78"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DiscardPile" type="PanelContainer" parent="PlayArea/CenterPilesArea"]
+custom_minimum_size = Vector2(84, 122)
+layout_mode = 2
+mouse_filter = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pile")
+
+[node name="EmptyLabel" type="Label" parent="PlayArea/CenterPilesArea/DiscardPile"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.85, 0.75, 0.6)
+theme_override_font_sizes/font_size = 12
+text = "FIRE PILE\n(دبس / نار)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CardSlot" type="Control" parent="PlayArea/CenterPilesArea/DiscardPile"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="BottomArea" type="VBoxContainer" parent="PlayArea"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -225.0
+offset_right = -16.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 8
+alignment = 2
+
+[node name="ActionButtonsBar" type="HBoxContainer" parent="PlayArea/BottomArea"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="PlayArea/BottomArea/ActionButtonsBar"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="HandContainer" type="HBoxContainer" parent="PlayArea/BottomArea"]
+custom_minimum_size = Vector2(0, 130)
+layout_mode = 2
+theme_override_constants/separation = -28
+alignment = 1
+
+[node name="RoundOverDialog" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -260.0
+offset_top = -180.0
+offset_right = 260.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dialog")
+
+[node name="VBox" type="VBoxContainer" parent="RoundOverDialog"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 20.0
+offset_right = -24.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="Title" type="Label" parent="RoundOverDialog/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.85, 0.35, 1)
+theme_override_font_sizes/font_size = 22
+text = "ROUND COMPLETE"
+horizontal_alignment = 1
+
+[node name="ResultText" type="Label" parent="RoundOverDialog/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.95, 0.9, 1)
+theme_override_font_sizes/font_size = 14
+text = "Winner: Human Player (-30 pts)"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ScoresBreakdown" type="Label" parent="RoundOverDialog/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.85, 0.75, 1)
+theme_override_font_sizes/font_size = 13
+text = "Scores..."
+horizontal_alignment = 1
+
+[node name="DialogButtons" type="HBoxContainer" parent="RoundOverDialog/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="NextRoundBtn" type="Button" parent="RoundOverDialog/VBox/DialogButtons"]
+custom_minimum_size = Vector2(125, 36)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.05, 0.1, 0.05, 1)
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_gold")
+text = "Next Round >"
+
+[node name="InspectAIBtn" type="Button" parent="RoundOverDialog/VBox/DialogButtons"]
+custom_minimum_size = Vector2(185, 36)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3, 0.9, 0.7, 1)
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_dark")
+text = "🧠 AI Analysis & Decisions"
+
+[node name="NewGameBtn" type="Button" parent="RoundOverDialog/VBox/DialogButtons"]
+custom_minimum_size = Vector2(110, 36)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.95, 0.9, 1)
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_dark")
+text = "New Game"
+
+[node name="AILabOverlay" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lab_panel")
+
+[node name="VBox" type="VBoxContainer" parent="AILabOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 24.0
+offset_right = -32.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="LabHeader" type="HBoxContainer" parent="AILabOverlay/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="LabTitle" type="Label" parent="AILabOverlay/VBox/LabHeader"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3, 0.85, 0.55, 1)
+theme_override_font_sizes/font_size = 18
+text = "HAND AI LAB - Decision Inspector & Replay"
+
+[node name="Spacer" type="Control" parent="AILabOverlay/VBox/LabHeader"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MatchSelector" type="OptionButton" parent="AILabOverlay/VBox/LabHeader"]
+custom_minimum_size = Vector2(220, 30)
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+
+[node name="NextRoundFromLabBtn" type="Button" parent="AILabOverlay/VBox/LabHeader"]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.05, 0.1, 0.05, 1)
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_gold")
+text = "Next Round >"
+
+[node name="CloseLabBtn" type="Button" parent="AILabOverlay/VBox/LabHeader"]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.8, 0.8, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_dark")
+text = "⬅ Back to Game"
+
+[node name="TurnScrubberBar" type="HBoxContainer" parent="AILabOverlay/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="FirstTurnBtn" type="Button" parent="AILabOverlay/VBox/TurnScrubberBar"]
+custom_minimum_size = Vector2(40, 30)
+layout_mode = 2
+text = "<<"
+
+[node name="PrevTurnBtn" type="Button" parent="AILabOverlay/VBox/TurnScrubberBar"]
+custom_minimum_size = Vector2(85, 30)
+layout_mode = 2
+text = "< Prev"
+
+[node name="TurnStatusLabel" type="Label" parent="AILabOverlay/VBox/TurnScrubberBar"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.85, 0.45, 1)
+theme_override_font_sizes/font_size = 14
+text = "Turn 1 / 1"
+horizontal_alignment = 1
+
+[node name="NextTurnBtn" type="Button" parent="AILabOverlay/VBox/TurnScrubberBar"]
+custom_minimum_size = Vector2(85, 30)
+layout_mode = 2
+text = "Next >"
+
+[node name="LastTurnBtn" type="Button" parent="AILabOverlay/VBox/TurnScrubberBar"]
+custom_minimum_size = Vector2(40, 30)
+layout_mode = 2
+text = ">>"
+
+[node name="LabContent" type="HBoxContainer" parent="AILabOverlay/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 18
+
+[node name="BoardReconstruct" type="VBoxContainer" parent="AILabOverlay/VBox/LabContent"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="TurnInfoLabel" type="Label" parent="AILabOverlay/VBox/LabContent/BoardReconstruct"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.9, 0.85, 1)
+theme_override_font_sizes/font_size = 14
+text = "AI Hand & Table State"
+
+[node name="LabHandContainer" type="HBoxContainer" parent="AILabOverlay/VBox/LabContent/BoardReconstruct"]
+custom_minimum_size = Vector2(0, 110)
+layout_mode = 2
+theme_override_constants/separation = -24
+alignment = 1
+
+[node name="NeuralVisualizer" type="PanelContainer" parent="AILabOverlay/VBox/LabContent/BoardReconstruct"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_btn_dark")
+
+[node name="NeuralVBox" type="VBoxContainer" parent="AILabOverlay/VBox/LabContent/BoardReconstruct/NeuralVisualizer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="NetTitle" type="Label" parent="AILabOverlay/VBox/LabContent/BoardReconstruct/NeuralVisualizer/NeuralVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3, 0.9, 0.7, 1)
+theme_override_font_sizes/font_size = 14
+text = "🧠 Neural Value Network Live Activation (الشبكة العصبية لايف):"
+
+[node name="FeatureBadgesGrid" type="HFlowContainer" parent="AILabOverlay/VBox/LabContent/BoardReconstruct/NeuralVisualizer/NeuralVBox"]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 6
+
+[node name="BrainGraph" type="Control" parent="AILabOverlay/VBox/LabContent/BoardReconstruct/NeuralVisualizer/NeuralVBox"]
+custom_minimum_size = Vector2(480, 160)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("3_brain_script")
+
+[node name="NetOutputLabel" type="Label" parent="AILabOverlay/VBox/LabContent/BoardReconstruct/NeuralVisualizer/NeuralVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.9, 0.5, 1)
+theme_override_font_sizes/font_size = 13
+text = "Predicted State Quality: V(s) = +85.2 pts"
+
+[node name="InspectorPanel" type="PanelContainer" parent="AILabOverlay/VBox/LabContent"]
+custom_minimum_size = Vector2(360, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_btn_dark")
+
+[node name="VBox" type="VBoxContainer" parent="AILabOverlay/VBox/LabContent/InspectorPanel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ChosenMoveTitle" type="Label" parent="AILabOverlay/VBox/LabContent/InspectorPanel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.9, 0.5, 1)
+theme_override_font_sizes/font_size = 15
+text = "AI Chosen Move:"
+
+[node name="ChosenMoveValue" type="Label" parent="AILabOverlay/VBox/LabContent/InspectorPanel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_font_sizes/font_size = 14
+text = "DISCARD 6"
+
+[node name="AlternativesTitle" type="Label" parent="AILabOverlay/VBox/LabContent/InspectorPanel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.8, 0.4, 1)
+theme_override_font_sizes/font_size = 14
+text = "Evaluated Alternatives:"
+
+[node name="AlternativesList" type="VBoxContainer" parent="AILabOverlay/VBox/LabContent/InspectorPanel/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 4
+
+[node name="TelemetryLabel" type="Label" parent="AILabOverlay/VBox/LabContent/InspectorPanel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.75, 0.7, 1)
+theme_override_font_sizes/font_size = 12
+text = "Search: 45 ISMCTS Iterations | Latency: 12ms"

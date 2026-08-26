@@ -1,0 +1,217 @@
+{
+  "main": {
+    "id": "0f31e632f56ebdc9",
+    "type": "split",
+    "children": [
+      {
+        "id": "ccc2d4a621d21c44",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ddd03dad69cd7489",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Games/match_39479ae6.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "match_39479ae6"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "c063499188d215ef",
+    "type": "split",
+    "children": [
+      {
+        "id": "5f587b297fc66680",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "aac957ef5d15a2c1",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "96e58c2b9fdfb506",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "cf52b92914730552",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "4fd870af096e6495",
+    "type": "split",
+    "children": [
+      {
+        "id": "3c0999796a7777b5",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "9c25e8270caaa821",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "570d98ae5cb7b4d8",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "7c5ecfa401297b53",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "f10b3e2e4f19561f",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "8d0afa39ea41177e",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "ddd03dad69cd7489",
+  "lastOpenFiles": [
+    "Index.md",
+    "Games/match_d3db8c19.md",
+    "Mistakes/Unopened Hand Penalty.md",
+    "Strategy/Apex Championship Blueprint.md",
+    "Strategy/Opening 51 Points Strategy.md",
+    "Learned Patterns/Joker Mastery.md",
+    "Games/match_17960476.md",
+    "Games/match_29308146.md",
+    "Games/match_e971010e.md",
+    "Games/match_e8b859c2.md",
+    "Learned Patterns/10,000 Games Training Milestones.md",
+    "Learned Patterns/Search Pareto Frontier & Ablation.md",
+    "Games/match_ac9aba11.md",
+    "Games/match_517abbfe.md",
+    "Games/match_af46e281.md",
+    "Games/match_7376f2ce.md",
+    "Games/match_a58ea9cd.md",
+    "Games/match_27cfce99.md",
+    "Games/match_f69772df.md",
+    "Games/match_754c60aa.md",
+    "Games/match_aacbce2d.md",
+    "Games/match_b5969e17.md",
+    "Games/match_0b4d2e53.md",
+    "Games/match_1c834f8f.md",
+    "Games/match_e91969c5.md",
+    "Games/match_4a1df02e.md"
+  ]
+}
